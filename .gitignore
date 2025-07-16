@@ -11,6 +11,7 @@ HISTORY.txt
 README.txt
 share-web/bin/
 share-web/target/
+share-client/node/*
 node_modules/
 target/
 .angular/
@@ -24,3 +25,15 @@ dist/
 .project
 .settings/
 .factorypath
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+build/
+out/
+*.tmp
+*.temp
+*.md
