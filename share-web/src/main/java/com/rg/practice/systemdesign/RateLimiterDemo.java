@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 
  */
-public class RateLimiterTest {
+public class RateLimiterDemo {
 	/** 
 	 * @param args
 	 */
