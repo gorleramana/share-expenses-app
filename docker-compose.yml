@@ -1,0 +1,71 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=hanu
+      - GF_SECURITY_ADMIN_USER=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+
+  loki:
+    image: grafana/loki:2.9.4
+    command: ["-config.file=/etc/loki/config.yml"]
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yml:/etc/loki/config.yml
+      - loki_data:/loki
+    networks:
+      - monitoring
+
+  promtail:
+    image: grafana/promtail:2.9.4
+    command: ["-config.file=/etc/promtail/config.yml"]
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - ./personalize-web/target/logs:/var/log/personalize:ro
+    networks:
+      - monitoring
+    depends_on:
+      - loki
+
+  tempo:
+    image: grafana/tempo:2.4.1
+    command: ["-config.file=/etc/tempo/tempo.yml"]
+    ports:
+      - "3200:3200"   # Tempo HTTP/metrics/API
+      - "4318:4318"   # OTLP HTTP ingest
+    volumes:
+      - ./tempo.yml:/etc/tempo/tempo.yml
+      - tempo_data:/var/tempo
+    networks:
+      - monitoring
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+  tempo_data:
+
+networks:
+  monitoring:
+    driver: bridge

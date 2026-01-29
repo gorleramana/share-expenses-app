@@ -1,9 +1,9 @@
 <div class="login-page">
     <form class="login-card" [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit()">
         <div class="container">
-            <input formControlName="email" type="email" placeholder="*Enter Email" name="email" required>
-            <div *ngIf="forgotPasswordForm.get('email')?.invalid && forgotPasswordForm.get('email')?.touched" class="error">
-                Valid email is required.
+            <input formControlName="username" type="text" placeholder="*Enter Username" name="username" required>
+            <div *ngIf="forgotPasswordForm.get('username')?.invalid && forgotPasswordForm.get('username')?.touched" class="error">
+                Valid username is required.
             </div>
 
             <input class="inputGroup" formControlName="password" type="password" placeholder="*New Password" required>

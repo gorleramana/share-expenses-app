@@ -5,7 +5,8 @@ import { AddTileDialogComponent } from '../add-tile-dialog/add-tile-dialog.compo
 @Component({
   selector: 'app-rg-home',
   templateUrl: './rg-home.component.html',
-  styleUrl: './rg-home.component.css'
+  styleUrl: './rg-home.component.css',
+  standalone: false
 })
 export class RgHomeComponent {
 

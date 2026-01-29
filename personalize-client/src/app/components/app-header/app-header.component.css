@@ -28,16 +28,13 @@
 
 .logo {
   cursor: default;
-  position: relative;
-  margin-right: auto;
-  flex-shrink: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .logo.clickable {
   cursor: pointer;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .logo h1 {
@@ -51,7 +48,9 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  margin-left: auto;
+  z-index: 10;
 }
 
 .nav-links a {
@@ -81,6 +80,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .avatar-img {
@@ -104,6 +104,9 @@
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 4px;
 }
 
 .home-btn:hover {

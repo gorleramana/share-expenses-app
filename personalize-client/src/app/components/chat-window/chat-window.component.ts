@@ -4,7 +4,8 @@ import { AiChatService } from '../../services/ai-chat.service';
 @Component({
   selector: 'app-chat-window',
   templateUrl: './chat-window.component.html',
-  styleUrls: ['./chat-window.component.css']
+  styleUrls: ['./chat-window.component.css'],
+  standalone: false
 })
 export class ChatWindowComponent {
   @Output() close = new EventEmitter<void>();
