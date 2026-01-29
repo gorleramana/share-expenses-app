@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors }
 @Component({
   selector: 'app-rg-forgot-pwd',
   templateUrl: './rg-forgot-pwd.component.html',
-  styleUrl: './rg-forgot-pwd.component.css'
+  styleUrl: './rg-forgot-pwd.component.css',
+  standalone: false
 })
 export class RgForgotPwdComponent {
   forgotPasswordForm: FormGroup;
@@ -12,7 +13,7 @@ isSubmitting = false;
 
   constructor(private fb: FormBuilder) {
     this.forgotPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordsMatchValidator });
@@ -25,7 +26,7 @@ isSubmitting = false;
     }
 
     const fv = this.forgotPasswordForm.value;
-    console.log('Reset password for:', fv.email);
+    console.log('Reset password for:', fv.username);
     // TODO: call reset-password API when available
   }
 

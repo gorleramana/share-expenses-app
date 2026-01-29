@@ -6,7 +6,8 @@ import { PersonalizeService } from '../../services/personalize.service';
 @Component({
   selector: 'app-rg-login',
   templateUrl: './rg-login.component.html',
-  styleUrl: './rg-login.component.css'
+  styleUrl: './rg-login.component.css',
+  standalone: false
 })
 export class RgLoginComponent {
   loginForm: FormGroup;
@@ -30,6 +31,17 @@ export class RgLoginComponent {
       if (msg) {
         this.registrationSuccess = msg;
         sessionStorage.removeItem('registration_success');
+      }
+
+      // Load remembered credentials if available
+      const rememberedUsername = localStorage.getItem('remembered_username');
+      const rememberedPassword = localStorage.getItem('remembered_password');
+      if (rememberedUsername && rememberedPassword) {
+        this.loginForm.patchValue({
+          username: rememberedUsername,
+          password: rememberedPassword,
+          remember: true
+        });
       }
     } catch (e) { }
   }
@@ -61,6 +73,23 @@ export class RgLoginComponent {
           console.log('Login successful', res);
           this.successMessage = 'User login successful, welcome home.';
           this.isSubmitting = false;
+          
+          // Handle remember me functionality
+          if (fv.remember) {
+            try {
+              localStorage.setItem('remembered_username', fv.username);
+              localStorage.setItem('remembered_password', fv.password);
+            } catch (e) {
+              console.error('Failed to save credentials', e);
+            }
+          } else {
+            // Clear remembered credentials if remember me is unchecked
+            try {
+              localStorage.removeItem('remembered_username');
+              localStorage.removeItem('remembered_password');
+            } catch (e) {}
+          }
+
           // store user details for profile update
           try { 
             sessionStorage.setItem('login_success', this.successMessage);

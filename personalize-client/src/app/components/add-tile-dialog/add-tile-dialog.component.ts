@@ -5,7 +5,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-tile-dialog',
   templateUrl: './add-tile-dialog.component.html',
-  styleUrls: ['./add-tile-dialog.component.css']
+  styleUrls: ['./add-tile-dialog.component.css'],
+  standalone: false
 })
 export class AddTileDialogComponent {
   form: FormGroup;

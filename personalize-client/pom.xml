@@ -14,11 +14,11 @@
 	<name>personalize-client</name>
 	<description>Frontend client for PersonalizeU application</description>
 	<properties>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
-		<node.version>v18.19.1</node.version>
-		<npm.version>9.6.7</npm.version>
+		<node.version>v20.19.0</node.version>
+		<npm.version>10.7.0</npm.version>
 	</properties>
 	<build>
 		<plugins>
@@ -28,14 +28,10 @@
 				<version>${frontend-maven-plugin.version}</version>
 				<executions>
 					<execution>
-						<id>install node and npm</id>
+						<id>install-node-and-npm</id>
 						<goals>
 							<goal>install-node-and-npm</goal>
 						</goals>
-						<configuration>
-							<nodeVersion>${node.version}</nodeVersion>
-							<npmVersion>${npm.version}</npmVersion>
-						</configuration>
 					</execution>
 					<execution>
 						<id>npm install</id>
@@ -43,7 +39,7 @@
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install</arguments>
+							<arguments>install --legacy-peer-deps</arguments>
 						</configuration>
 					</execution>
 					<execution>
@@ -56,6 +52,10 @@
 						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<nodeVersion>${node.version}</nodeVersion>
+					<npmVersion>${npm.version}</npmVersion>
+				</configuration>
 			</plugin>
 		</plugins>
 		<finalName>personalize-client</finalName>

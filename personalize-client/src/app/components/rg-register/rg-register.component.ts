@@ -7,7 +7,8 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-rg-register',
   templateUrl: './rg-register.component.html',
-  styleUrl: './rg-register.component.css'
+  styleUrl: './rg-register.component.css',
+  standalone: false
 })
 export class RgRegisterComponent {
   registerForm: FormGroup;

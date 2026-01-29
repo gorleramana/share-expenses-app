@@ -32,12 +32,6 @@ public class UserController {
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
-    @GetMapping(value = PersonalizeConstants.HEALTH, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> health() {
-        log.info("Health check endpoint called");
-        return new ResponseEntity<>("Application is running", HttpStatus.OK);
-    }
 
     @PostMapping(value = PersonalizeConstants.REGISTER_USER, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserRegistrationResponse> registerUser(@Valid @RequestBody UserRegistrationRequest request) {
